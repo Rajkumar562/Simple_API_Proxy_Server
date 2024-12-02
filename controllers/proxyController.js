@@ -6,7 +6,6 @@ const handleProxyRequest = async (req, res) => {
   const cacheKey = JSON.stringify(query);
 
   try {
-    // Check cache
     const cachedResponse = getCachedResponse(cacheKey);
     if (cachedResponse) {
       console.log("Serving from cache");
@@ -14,7 +13,6 @@ const handleProxyRequest = async (req, res) => {
       return res.status(200).json(cachedResponse);
     }
 
-    // Fetch from external API
     const responseData = await fetchFromApi(query);
     setCacheResponse(cacheKey, responseData);
     req.rateLimitStatus = "cache miss";

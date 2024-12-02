@@ -1,5 +1,7 @@
 const NodeCache = require("node-cache");
-const cache = new NodeCache({ stdTTL: Number(process.env.CACHE_DURATION || 300) });
+require("dotenv").config();
+
+const cache = new NodeCache({ stdTTL: Number(process.env.CACHE_DURATION) });
 
 const getCachedResponse = (key) => cache.get(key);
 const setCacheResponse = (key, value) => cache.set(key, value);
